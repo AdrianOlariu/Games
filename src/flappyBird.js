@@ -1,10 +1,15 @@
-let score = 0;
-let scoreElement = document.getElementById("score");
-
 let canvasElement = document.getElementById("cvs");
+
 /** @type {CanvasRenderingContext2D} */
 let ctx = canvasElement.getContext('2d');
 
+let canvasW = 1282; //window.innerWidth/1.5;
+let canvasH = window.innerHeight / 1.5;
+canvasElement.width = canvasW;
+canvasElement.height = canvasH;
+
+let scoreElement = document.getElementById("score");
+let score = 0;
 let birdFalling = true;
 let birdAscending;
 let clicked = 0;
@@ -16,11 +21,6 @@ let eyeY = 0;
 let wingX = 0;
 let wingY = 0;
 let showBoundingBox = false;
-
-let canvasW = 1282; //window.innerWidth/1.5;
-let canvasH = window.innerHeight / 1.5;
-canvasElement.width = canvasW;
-canvasElement.height = canvasH;
 
 let blockX, blockY, blockWidth, blockHeight;
 
@@ -101,37 +101,39 @@ let bird = {
     h:90
 };
 
-
-drawBird();
-
 let game = setInterval(()=>{
     
     if(gameRunning == true){
-        
         ctx.clearRect(0, 0, canvasW, canvasH);
         moveBlock(blocks, speed);
-    
-        
         drawBlock(blocks);
         drawBird();
 
         if(checkBirdCollision()){
-            
-            
             eyeX = -4;
             drawBird();
-            
             clearInterval(game);
             setTimeout(() => {
                 alert("Game Over");
                 gameRunning = false;
             }, 500);
-            
         }
     }
 
-    
-    
+    if(birdFalling){
+        birdVelocity -= 1 + birdVelocityValue;
+    }else{
+        eyeY = 0;
+    }
+    if((bird.y + bird.y) / 2 < (holes[0].y + holes[0].h) / 2  ){
+        eyeY += 0.05;
+    }else{
+        eyeY -= 0.05;
+    }
+
+    bird.y = -birdVelocity;
+    birdVelocityValue += .03;
+
     if(blocks[0].x < -blockWidth){
         score += 1;
         scoreElement.innerHTML = score;
@@ -141,31 +143,6 @@ let game = setInterval(()=>{
         drawBlock(blocks);
     }
 
-    let offset = 200;
-    if(blocks[0].x < canvasW / 2){
-        if(blocks.length < 3){
-            offset += 200;
-            blocks.push({x:blocks[0].x + offset, y:blocks[0].y, w:blocks[0].w, h:blocks[0].h});
-            console.log(blocks);
-        }
-        
-    }
-
-        if(birdFalling){
-            birdVelocity -= 1 + birdVelocityValue;
-        }else{
-            eyeY = 0;
-        }
-
-        if((bird.y + bird.y) / 2 < (holes[0].y + holes[0].h) / 2  ){
-            eyeY += 0.05;
-        }else{
-            eyeY -= 0.05;
-        }
-
-    bird.y = -birdVelocity;
-    birdVelocityValue += .03;
-    
 },10);
 
 function generateBlocks(blocks){
@@ -180,4 +157,3 @@ function generateBlocks(blocks){
     }
     console.log(blocks);
 }
-

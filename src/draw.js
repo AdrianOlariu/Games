@@ -4,11 +4,9 @@ function moveBlock(block, speed){
     holes[0].w = blocks[0].w + 2;
     holes[0].h = holeHeight;
     block[0].x -= speed;
-    
 }
 
 function drawBlock(block){
-    
     ctx.beginPath();
     ctx.fillStyle = "#6CC4A1";
     ctx.rect(block[0].x, block[0].y, block[0].w, block[0].h);
@@ -17,8 +15,6 @@ function drawBlock(block){
     ctx.closePath();
     ctx.clearRect(holes[0].x, holes[0].y, holes[0].w, holes[0].h);
 }
-
-
 
 function drawBird() {
 
@@ -64,7 +60,6 @@ function drawBird() {
     ctx.beginPath();
     ctx.moveTo( bird.x + 95 + 5, bird.y + 70);
     ctx.lineTo(bird.x + 145, bird.y + 70);
-    
     ctx.stroke();
     ctx.closePath();
 
