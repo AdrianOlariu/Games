@@ -1,7 +1,5 @@
-console.log("flappy bird");
 let score = 0;
 let scoreElement = document.getElementById("score");
-scoreElement.innerHTML = score;
 
 let canvasElement = document.getElementById("cvs");
 /** @type {CanvasRenderingContext2D} */
@@ -10,6 +8,8 @@ let ctx = canvasElement.getContext('2d');
 let birdFalling = true;
 let birdAscending;
 let clicked = 0;
+
+//animated
 let eyeX = 0;
 let eyeY = 0;
 
@@ -17,66 +17,10 @@ let wingX = 0;
 let wingY = 0;
 let showBoundingBox = false;
 
-function boundingBox(){
-    if(!showBoundingBox){
-        showBoundingBox = true;
-    }else{
-        showBoundingBox = false;
-    }
-}
-
-let gameRunning = false;
-canvasElement.addEventListener("click", () => {
-    if(gameRunning == false){
-        gameRunning = true;
-    }
-    if(clicked == 0){
-        counter = 0;
-        wingY = 15;
-        wingX = -5;
-        birdAscending = setInterval(() => {
-            clicked = 1;
-                birdFalling = false;
-                velocityValue = 2.5;
-                counter ++;
-                if(counter == 20){
-                        wingY = 0;
-                        wingX = 0;
-                    started = false;
-                    clearInterval(birdAscending);
-                    birdFalling = true;
-                    velocityValue = 0;
-                    clicked = 0;
-                }
-                velocityValue -= 0.5;
-                birdVelocity += 3 + velocityValue;
-                
-            },20);
-        }
-})
-
-// birdAscending = setInterval(() => {
-            //     birdFalling = false;
-            //     velocityValue = 2;
-            //     counter ++;
-            //     if(counter == 20){
-            //         started = false;
-            //         console.log('close');
-            //         clearInterval(birdAscending);
-            //         birdFalling = true;
-            //         velocityValue = 0;
-            //     }
-            //     birdVelocity-=2;
-            //     birdVelocity += 4 + velocityValue;
-            // },20);
-
-
 let canvasW = 1282; //window.innerWidth/1.5;
 let canvasH = window.innerHeight / 1.5;
 canvasElement.width = canvasW;
 canvasElement.height = canvasH;
-
-
 
 let blockX, blockY, blockWidth, blockHeight;
 
@@ -89,12 +33,50 @@ console.log(canvasH);
 let speed = 2;
 
 //hole
-let min = 100;
-let max = 450;
+let holeMin = 100;
+let holeMax = 450;
 let holeHeight = 200;
-let randomPosition = Math.floor(Math.random() * (max - min) + min);
+let randomPosition = Math.floor(Math.random() * (holeMax - holeMin) + holeMin);
 let birdVelocity = 5;
-let velocityValue = 0;
+let birdVelocityValue = 0;
+
+function boundingBox(){
+    if(!showBoundingBox){
+        showBoundingBox = true;
+    }else{
+        showBoundingBox = false;
+    }
+}
+
+let gameRunning = false;
+
+canvasElement.addEventListener("click", () => {
+    if(gameRunning == false){
+        gameRunning = true;
+    }
+    if(clicked == 0){
+        counter = 0;
+        wingY = 15;
+        wingX = -5;
+        birdAscending = setInterval(() => {
+            clicked = 1;
+            birdFalling = false;
+            birdVelocityValue = 2.5;
+            counter ++;
+            if(counter == 20){
+                wingY = 0;
+                wingX = 0;
+                started = false;
+                clearInterval(birdAscending);
+                birdFalling = true;
+                birdVelocityValue = 0;
+                clicked = 0;
+            }
+            birdVelocityValue -= 0.8;
+            birdVelocity += 3 + birdVelocityValue; 
+            },20);
+        }
+})
 
 let blocks = [
     {
@@ -154,11 +136,11 @@ let game = setInterval(()=>{
         score += 1;
         scoreElement.innerHTML = score;
         blocks.shift();
-        randomPosition = Math.floor(Math.random() * (max - min) + min);
+        randomPosition = Math.floor(Math.random() * (holeMax - holeMin) + holeMin);
         blocks.push({x:canvasW, y:0, w:blockWidth, h:blockHeight});
-        
         drawBlock(blocks);
     }
+
     let offset = 200;
     if(blocks[0].x < canvasW / 2){
         if(blocks.length < 3){
@@ -170,8 +152,7 @@ let game = setInterval(()=>{
     }
 
         if(birdFalling){
-            birdVelocity -= 1 + velocityValue;
-            
+            birdVelocity -= 1 + birdVelocityValue;
         }else{
             eyeY = 0;
         }
@@ -183,14 +164,9 @@ let game = setInterval(()=>{
         }
 
     bird.y = -birdVelocity;
-    velocityValue += .03;
+    birdVelocityValue += .03;
     
 },10);
-
-function generateBlocks(){
-
-}
-
 
 function generateBlocks(blocks){
     let offset = 200;

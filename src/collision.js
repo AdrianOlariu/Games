@@ -15,8 +15,5 @@ function checkBirdCollision(){
     if(bird.y - 100 > canvasH){
         collision = true;
     }
-
     return collision;
-
-    
 }
