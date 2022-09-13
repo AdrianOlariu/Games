@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+
+        <div class="nav-bar">
+            <h1 class="inline-text">Score:</h1><h1 class="inline-text" id="score"></h1>
+        </div>
+        <br>
+
+        <canvas id="cvs" >
+            Your browser / device doesn't support CANVAS!
+        </canvas>
+        <br>
+        <button class="btn-bounding-box" onclick="boundingBox()">Turn on Collision Bounding-Box</button>
+
+    </div>
+    <script src="./src/draw.js"></script>
+    <script src="./src/flappyBird.js"></script>
+    
+    <script src="./src/collision.js"></script>
+</body>
+</html>

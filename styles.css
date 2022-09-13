@@ -1,0 +1,25 @@
+body{
+    background-color: bisque;
+}
+
+.nav-bar{
+    /* display:inline-block; */
+    clear: both;
+    overflow: hidden;
+    /* position: relative; */
+}
+
+#cvs{
+    border: 1px solid black;
+    background-color: #CCF3EE;
+    /* position: absolute; */
+}
+
+.inline-text{
+    display:inline;
+}
+
+.btn-bounding-box{
+    position: relative;
+}
+
