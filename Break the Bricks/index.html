@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1> Breakout Game</h1>
+    Bricks left:<span id="score"></span><br/>
+    Ball X:<span id="spanBallX"></span>
+    Ball Y:<span id="spanBallY"></span>
+    <div id="cvDiv">
+        <canvas id="cv" width="640" height="480"> Canvas not supported by your device / browser :( !</canvas>
+    </div>
+    
+    <script src="./src/draw.js"></script>
+    <script src="./src/breakout.js"></script>
+    <script src="./src/collisions.js"></script>
+    <script src="./src/controls.js"></script>
+    <script src="./src/ui.js"></script>
+</body>
+</html>

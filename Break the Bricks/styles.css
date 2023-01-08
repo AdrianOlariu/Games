@@ -1,0 +1,17 @@
+body{
+    background: #F7ECDE;
+}
+
+#cv{
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+
+    position:absolute;
+    background-color: #FBF8F1;
+    /* outline: black 3px solid; */
+}
+
+#score{
+    color:red;
+}
